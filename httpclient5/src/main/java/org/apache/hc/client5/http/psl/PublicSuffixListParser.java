@@ -26,6 +26,7 @@
  */
 package org.apache.hc.client5.http.psl;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -69,7 +70,7 @@ public final class PublicSuffixListParser {
         final BufferedReader r = new BufferedReader(reader);
 
         String line;
-        while ((line = r.readLine()) != null) {
+        while ((line = BoundedLineReader.readLine(r, 5_000_000)) != null) {
             if (line.isEmpty()) {
                 continue;
             }
@@ -114,7 +115,7 @@ public final class PublicSuffixListParser {
         List<String> rules = null;
         List<String> exceptions = null;
         String line;
-        while ((line = r.readLine()) != null) {
+        while ((line = BoundedLineReader.readLine(r, 5_000_000)) != null) {
             if (line.isEmpty()) {
                 continue;
             }
