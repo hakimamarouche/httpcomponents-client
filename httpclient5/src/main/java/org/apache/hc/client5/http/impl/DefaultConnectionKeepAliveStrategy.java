@@ -64,7 +64,7 @@ public class DefaultConnectionKeepAliveStrategy implements ConnectionKeepAliveSt
             final HeaderElement he = it.next();
             final String param = he.getName();
             final String value = he.getValue();
-            if (value != null && param.equalsIgnoreCase("timeout")) {
+            if (value != null && "timeout".equalsIgnoreCase(param)) {
                 try {
                     return TimeValue.ofSeconds(Long.parseLong(value));
                 } catch(final NumberFormatException ignore) {
