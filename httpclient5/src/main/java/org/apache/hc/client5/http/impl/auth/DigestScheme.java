@@ -276,7 +276,7 @@ public class DigestScheme implements AuthScheme, Serializable {
         final Charset charset = AuthSchemeSupport.parseCharset(paramMap.get("charset"), defaultCharset);
         String digAlg = algorithm;
         // If an algorithm is not specified, default to MD5.
-        if (digAlg == null || digAlg.equalsIgnoreCase("MD5-sess")) {
+        if (digAlg == null || "MD5-sess".equalsIgnoreCase(digAlg)) {
             digAlg = "MD5";
         }
 

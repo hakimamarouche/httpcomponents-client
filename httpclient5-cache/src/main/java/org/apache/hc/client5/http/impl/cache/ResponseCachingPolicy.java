@@ -306,9 +306,9 @@ class ResponseCachingPolicy {
             final HeaderElement elt = it.next();
             final String proto = elt.toString().split("\\s")[0];
             if (proto.contains("/")) {
-                return proto.equals("HTTP/1.0");
+                return "HTTP/1.0".equals(proto);
             } else {
-                return proto.equals("1.0");
+                return "1.0".equals(proto);
             }
         }
         final ProtocolVersion version = response.getVersion() != null ? response.getVersion() : HttpVersion.DEFAULT;
