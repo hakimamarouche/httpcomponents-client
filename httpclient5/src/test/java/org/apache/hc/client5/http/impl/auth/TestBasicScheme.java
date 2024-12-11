@@ -26,6 +26,7 @@
  */
 package org.apache.hc.client5.http.impl.auth;
 
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -170,6 +171,7 @@ public class TestBasicScheme {
         out.flush();
         final byte[] raw = buffer.toByteArray();
         final ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(raw));
+        ObjectInputFilters.enableObjectFilterIfUnprotected(in);
         final BasicScheme authScheme = (BasicScheme) in.readObject();
 
         Assertions.assertEquals(basicScheme.getName(), authScheme.getName());
@@ -187,6 +189,7 @@ public class TestBasicScheme {
         out.flush();
         final byte[] raw = buffer.toByteArray();
         final ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(raw));
+        ObjectInputFilters.enableObjectFilterIfUnprotected(in);
         final BasicScheme authScheme = (BasicScheme) in.readObject();
 
         Assertions.assertEquals(basicScheme.getName(), authScheme.getName());
