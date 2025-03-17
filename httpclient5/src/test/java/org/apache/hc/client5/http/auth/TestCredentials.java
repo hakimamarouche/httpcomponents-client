@@ -27,6 +27,7 @@
 
 package org.apache.hc.client5.http.auth;
 
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -207,6 +208,7 @@ public class TestCredentials {
         final byte[] raw = outbuffer.toByteArray();
         final ByteArrayInputStream inBuffer = new ByteArrayInputStream(raw);
         final ObjectInputStream inStream = new ObjectInputStream(inBuffer);
+        ObjectInputFilters.enableObjectFilterIfUnprotected(inStream);
         final UsernamePasswordCredentials clone = (UsernamePasswordCredentials) inStream.readObject();
         Assertions.assertEquals(orig, clone);
     }
@@ -221,6 +223,7 @@ public class TestCredentials {
         final byte[] raw = outbuffer.toByteArray();
         final ByteArrayInputStream inBuffer = new ByteArrayInputStream(raw);
         final ObjectInputStream inStream = new ObjectInputStream(inBuffer);
+        ObjectInputFilters.enableObjectFilterIfUnprotected(inStream);
         final NTCredentials clone = (NTCredentials) inStream.readObject();
         Assertions.assertEquals(orig, clone);
     }
