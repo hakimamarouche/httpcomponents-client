@@ -78,7 +78,8 @@
     <api.comparison.version>5.2</api.comparison.version>
     <hc.animal-sniffer.signature.ignores>javax.net.ssl.SSLEngine,javax.net.ssl.SSLParameters,java.nio.ByteBuffer,java.nio.CharBuffer</hc.animal-sniffer.signature.ignores>
     <japicmp.version>0.15.4</japicmp.version>
-  </properties>
+  <versions.java-security-toolkit>1.2.1</versions.java-security-toolkit>
+ </properties>
 
   <dependencyManagement>
     <dependencies>
@@ -193,7 +194,12 @@
         <version>${hamcrest.version}</version>
         <scope>test</scope>
       </dependency>
-    </dependencies>
+   <dependency>
+    <groupId>io.github.pixee</groupId>
+    <artifactId>java-security-toolkit</artifactId>
+    <version>${versions.java-security-toolkit}</version>
+   </dependency>
+  </dependencies>
   </dependencyManagement>
 
   <modules>
