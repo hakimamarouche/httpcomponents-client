@@ -27,6 +27,7 @@
 
 package org.apache.hc.client5.http.impl.cookie;
 
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -76,6 +77,7 @@ public class TestBasicClientCookie {
         final byte[] raw = outbuffer.toByteArray();
         final ByteArrayInputStream inBuffer = new ByteArrayInputStream(raw);
         final ObjectInputStream inStream = new ObjectInputStream(inBuffer);
+        ObjectInputFilters.enableObjectFilterIfUnprotected(inStream);
         final BasicClientCookie clone = (BasicClientCookie) inStream.readObject();
         Assertions.assertEquals(orig.getName(), clone.getName());
         Assertions.assertEquals(orig.getValue(), clone.getValue());

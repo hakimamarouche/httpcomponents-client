@@ -26,6 +26,7 @@
  */
 package org.apache.hc.client5.http.impl.auth;
 
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -193,6 +194,7 @@ public class BasicAuthCache implements AuthCache {
             try {
                 final ByteArrayInputStream buf = new ByteArrayInputStream(bytes);
                 try (final ObjectInputStream in = new ObjectInputStream(buf)) {
+                    ObjectInputFilters.enableObjectFilterIfUnprotected(in);
                     return (AuthScheme) in.readObject();
                 }
             } catch (final IOException ex) {

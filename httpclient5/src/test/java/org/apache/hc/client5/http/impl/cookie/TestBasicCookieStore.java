@@ -27,6 +27,7 @@
 
 package org.apache.hc.client5.http.impl.cookie;
 
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -86,6 +87,7 @@ public class TestBasicCookieStore {
         final byte[] raw = outbuffer.toByteArray();
         final ByteArrayInputStream inBuffer = new ByteArrayInputStream(raw);
         final ObjectInputStream inStream = new ObjectInputStream(inBuffer);
+        ObjectInputFilters.enableObjectFilterIfUnprotected(inStream);
         final BasicCookieStore clone = (BasicCookieStore) inStream.readObject();
         final List<Cookie> expected = orig.getCookies();
         final List<Cookie> clones = clone.getCookies();
